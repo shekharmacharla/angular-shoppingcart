@@ -1,0 +1,41 @@
+
+
+
+<div class="panel panel-danger" class="panel panel-primary">
+  <div class="panel-heading">
+      {{pageTitle}}
+
+  </div>
+<div class="panel-body" *ngIf="products && products.length">
+  <div> 
+     <input type="text" class="form-control " placeholder="Filter products" [(ngModel)]="filterBy">
+  </div>
+
+  <div class="alert alert-success" *ngIf="filterBy">{{filterBy}} </div>
+
+  <table class="table table-hover table-bordered">
+    <tr >
+      <th><button class="btn btn-danger btn-hover" (click)="toggleimage()">  
+{{showHideImage ? 'Hide image' :'show image'}}
+      </button></th>
+      <th>Product Name</th>
+      <th>Product Code</th>
+      <th>Price</th>
+      <th>Rating</th>
+    </tr>
+    <tr *ngFor="let product of products | products:filterBy">
+      <td> 
+        <img *ngIf="showHideImage" [src]="product.imageUrl" style="width:35px">
+      </td>
+      <td>{{product.productName}}</td>
+      <td>{{product.productCode}}</td>
+      <td>{{product.price}}</td>
+      <td>
+          <app-rating [rating]='product.starRating' (ratingEvent)="ratingParentFn($event)" ></app-rating>
+      </td>
+    </tr>
+  </table>
+
+</div>
+
+</div>
